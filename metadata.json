@@ -1,6 +1,6 @@
 {
   "name": "eyp-kibana",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "author": "eyp",
   "summary": "installs kibana 4",
   "license": "Apache-2.0",
