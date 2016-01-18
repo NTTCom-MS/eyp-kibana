@@ -49,7 +49,7 @@ class kibana(
     {
       systemd::service { 'kibana':
         execstart => "${basedir}/${productname}/bin/kibana",
-        require   => [ Class['systemd'], File["${basedir}/${productname}/config/kibana.yml"] ],
+        require   => File["${basedir}/${productname}/config/kibana.yml"],
         before => Service['kibana'],
       }
     }
