@@ -17,7 +17,6 @@ class kibana(
   exec { "kibana wget ${version}":
     command => "wget ${kibana::params::kibana_src[$version]} -O $srcdir/kibana-$version.tgz",
     creates => "$srcdir/kibana-$version.tgz",
-    require => Package['wget'],
   }
 
   exec { "mkdir basedir kibana ${basedir}/${productname}":
