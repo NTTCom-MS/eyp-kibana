@@ -17,7 +17,6 @@ class kibana(
   exec { "kibana wget ${version}":
     command => "wget ${kibana::params::kibana_src[$version]} -O $srcdir/kibana-$version.tgz",
     creates => "$srcdir/kibana-$version.tgz",
-    require => Package['wget'],
   }
 
   exec { "mkdir basedir kibana ${basedir}/${productname}":
@@ -48,9 +47,11 @@ class kibana(
 
     if($kibana::systemd)
     {
+      include systemd
+
       systemd::service { 'kibana':
         execstart => "${basedir}/${productname}/bin/kibana",
-        require   => [ Class['systemd'], File["${basedir}/${productname}/config/kibana.yml"] ],
+        require   => File["${basedir}/${productname}/config/kibana.yml"],
         before => Service['kibana'],
       }
     }
