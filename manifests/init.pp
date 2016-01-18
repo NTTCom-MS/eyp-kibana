@@ -47,6 +47,8 @@ class kibana(
 
     if($kibana::systemd)
     {
+      include systemd
+
       systemd::service { 'kibana':
         execstart => "${basedir}/${productname}/bin/kibana",
         require   => File["${basedir}/${productname}/config/kibana.yml"],
