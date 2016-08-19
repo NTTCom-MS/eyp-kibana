@@ -1,13 +1,13 @@
 #
 class kibana(
-              $version='4.1.2',
-              $srcdir='/usr/local/src',
-              $basedir='/opt',
-              $productname='kibana',
-              $manage_service=true,
-              $host='0.0.0.0',
-              $port='5601',
-              $elasticsearch_url='http://localhost:9200',
+              $version           = '4.1.2',
+              $srcdir            = '/usr/local/src',
+              $basedir           = '/opt',
+              $productname       = 'kibana',
+              $manage_service    = true,
+              $host              = '0.0.0.0',
+              $port              = '5601',
+              $elasticsearch_url = 'http://localhost:9200',
             ) inherits kibana::params {
 
   Exec {
