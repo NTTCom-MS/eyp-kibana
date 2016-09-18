@@ -2,6 +2,7 @@ class kibana::params {
 
   $kibana_src = {
     '4.1.2' => 'https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz',
+    '4.5.4' => 'https://download.elastic.co/kibana/kibana/kibana-4.5.4-linux-x64.tar.gz',
   }
 
   case $::osfamily
