@@ -57,7 +57,7 @@ class kibana(
 
       systemd::service { 'kibana':
         execstart => "${basedir}/${productname}/bin/kibana",
-        require   => File["${basedir}/${productname}/config/kibana.yml"],
+        require   => File["${basedir}/${productname}-${version}/config/kibana.yml"],
         before    => Service['kibana'],
       }
     }
@@ -67,7 +67,7 @@ class kibana(
 
       initscript::service { 'kibana':
         cmd       => "${basedir}/${productname}/bin/kibana",
-        require   => [ Class['initscript'], File["${basedir}/${productname}/config/kibana.yml"] ],
+        require   => [ Class['initscript'], File["${basedir}/${productname}-${version}/config/kibana.yml"] ],
         before    => Service['kibana'],
       }
     }
