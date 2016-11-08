@@ -8,6 +8,7 @@ class kibana(
               $host              = '0.0.0.0',
               $port              = '5601',
               $elasticsearch_url = 'http://localhost:9200',
+              $purge_old         = false,
             ) inherits kibana::params {
 
   Exec {
@@ -22,6 +23,18 @@ class kibana(
   exec { "mkdir basedir kibana ${basedir}/${productname}":
     command => "mkdir -p ${basedir}/${productname}",
     creates => "$basedir/${productname}",
+  }
+
+  if($purge_old)
+  {
+    Exec["kibana wget ${version}"] {
+      notify => Exec["purge old ${version}"],
+    }
+
+    exec { "purge old ${version}":
+      command => "rm -fr ${basedir}/${productname}/*"
+      refreshonly => true,
+    }
   }
 
   exec { "tar xzf ${version} ${basedir}/${productname}":
