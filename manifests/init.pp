@@ -20,14 +20,14 @@ class kibana(
   }
 
   exec { "mkdir basedir kibana ${basedir}/${productname}-${version}":
-    command => "mkdir -p ${basedir}/${productname}",
-    creates => "${basedir}/${productname}",
+    command => "mkdir -p ${basedir}/${productname}-${version}",
+    creates => "${basedir}/${productname}-${version}",
   }
 
   exec { "tar xzf ${version} ${basedir}/${productname}-${version}":
-    command => "tar xzf ${srcdir}/kibana-${version}.tgz -C ${basedir}/${productname} --strip-components=1",
-    require => Exec[ [ "kibana wget ${version}", "mkdir basedir kibana ${basedir}/${productname}" ] ],
-    creates => "${basedir}/${productname}/bin/kibana",
+    command => "tar xzf ${srcdir}/kibana-${version}.tgz -C ${basedir}/${productname}-${version} --strip-components=1",
+    require => Exec[ [ "kibana wget ${version}", "mkdir basedir kibana ${basedir}/${productname}-${version}" ] ],
+    creates => "${basedir}/${productname}-${version}/bin/kibana",
   }
 
   file { "${basedir}/${productname}-${version}/config/kibana.yml":
