@@ -1,6 +1,6 @@
 #
 class kibana(
-              $version           = '4.1.2',
+              $version           = '5.0.0',
               $srcdir            = '/usr/local/src',
               $basedir           = '/opt',
               $productname       = 'kibana',
