@@ -8,7 +8,6 @@ class kibana(
               $host              = '0.0.0.0',
               $port              = '5601',
               $elasticsearch_url = 'http://localhost:9200',
-              $purge_old         = false,
             ) inherits kibana::params {
 
   Exec {
@@ -16,64 +15,60 @@ class kibana(
   }
 
   exec { "kibana wget ${version}":
-    command => "wget ${kibana::params::kibana_src[$version]} -O $srcdir/kibana-$version.tgz",
-    creates => "$srcdir/kibana-$version.tgz",
+    command => "wget ${kibana::params::kibana_src[$version]} -O ${srcdir}/kibana-${version}.tgz",
+    creates => "${srcdir}/kibana-${version}.tgz",
   }
 
-  exec { "mkdir basedir kibana ${basedir}/${productname}":
+  exec { "mkdir basedir kibana ${basedir}/${productname}-${version}":
     command => "mkdir -p ${basedir}/${productname}",
-    creates => "$basedir/${productname}",
+    creates => "${basedir}/${productname}",
   }
 
-  if($purge_old)
-  {
-    Exec["kibana wget ${version}"] {
-      notify => Exec["purge old ${version}"],
-    }
-
-    exec { "purge old ${version}":
-      command => "rm -fr ${basedir}/${productname}/*"
-      refreshonly => true,
-    }
-  }
-
-  exec { "tar xzf ${version} ${basedir}/${productname}":
-    command => "tar xzf $srcdir/kibana-$version.tgz -C ${basedir}/${productname} --strip-components=1",
+  exec { "tar xzf ${version} ${basedir}/${productname}-${version}":
+    command => "tar xzf ${srcdir}/kibana-${version}.tgz -C ${basedir}/${productname} --strip-components=1",
     require => Exec[ [ "kibana wget ${version}", "mkdir basedir kibana ${basedir}/${productname}" ] ],
     creates => "${basedir}/${productname}/bin/kibana",
   }
 
-  file { "${basedir}/${productname}/config/kibana.yml":
+  file { "${basedir}/${productname}-${version}/config/kibana.yml":
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template("${module_name}/kibana.erb"),
-    require => Exec["tar xzf ${version} ${basedir}/${productname}"],
-    backup  => ".back",
+    require => Exec["tar xzf ${version} ${basedir}/${productname}-${version}"],
+    backup  => '.back',
     notify  => $kibanaconf_notify,
+  }
+
+  file { "${basedir}/${productname}":
+    ensure => 'link',
+    target => "${basedir}/${productname}-${version}",
+    before => Service['kibana'],
   }
 
   if($manage_service)
   {
     $kibanaconf_notify=Service['kibana']
 
-    if($kibana::systemd)
+    if($kibana::params::systemd)
     {
-      include systemd
+      include ::systemd
 
       systemd::service { 'kibana':
         execstart => "${basedir}/${productname}/bin/kibana",
         require   => File["${basedir}/${productname}/config/kibana.yml"],
-        before => Service['kibana'],
+        before    => Service['kibana'],
       }
     }
     else
     {
+      include ::initscript
+
       initscript::service { 'kibana':
-        cmd => "${basedir}/${productname}/bin/kibana",
+        cmd       => "${basedir}/${productname}/bin/kibana",
         require   => [ Class['initscript'], File["${basedir}/${productname}/config/kibana.yml"] ],
-        before => Service['kibana'],
+        before    => Service['kibana'],
       }
     }
 

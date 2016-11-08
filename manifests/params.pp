@@ -20,7 +20,7 @@ class kibana::params {
         {
           $systemd=true
         }
-        default: { fail("Unsupported RHEL/CentOS version!")  }
+        default: { fail('Unsupported RHEL/CentOS version!')  }
       }
     }
     default  : { fail('Unsupported OS!') }
