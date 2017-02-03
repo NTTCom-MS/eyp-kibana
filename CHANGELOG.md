@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.0
+
+* updated to **kibana 5.2.0**
+
 ## 0.1.12
 
 * added **kibana 5.0.0** & changed default to it

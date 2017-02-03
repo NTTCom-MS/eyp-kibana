@@ -1,8 +1,8 @@
 {
   "name": "eyp-kibana",
-  "version": "0.1.12",
+  "version": "0.2.0",
   "author": "eyp",
-  "summary": "kibana 4 installation",
+  "summary": "kibana installation",
   "license": "Apache-2.0",
   "source": "",
   "project_page": null,
@@ -32,6 +32,16 @@
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [ "5", "6", "7" ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": ">= 3.8.0"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.8.0"
     }
   ]
 }
