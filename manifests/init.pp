@@ -66,15 +66,15 @@ class kibana(
       include ::initscript
 
       initscript::service { 'kibana':
-        cmd       => "${basedir}/${productname}/bin/kibana",
-        require   => [ Class['initscript'], File["${basedir}/${productname}-${version}/config/kibana.yml"] ],
-        before    => Service['kibana'],
+        cmd     => "${basedir}/${productname}/bin/kibana",
+        require => [ Class['initscript'], File["${basedir}/${productname}-${version}/config/kibana.yml"] ],
+        before  => Service['kibana'],
       }
     }
 
     service { 'kibana':
-      ensure  => 'running',
-      enable  => true,
+      ensure => 'running',
+      enable => true,
     }
   }
 
