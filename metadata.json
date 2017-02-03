@@ -2,7 +2,7 @@
   "name": "eyp-kibana",
   "version": "0.2.0",
   "author": "eyp",
-  "summary": "kibana installation",
+  "summary": "kibana installation and kibana.yml management",
   "license": "Apache-2.0",
   "source": "",
   "project_page": null,
