@@ -36,7 +36,7 @@ class kibana::params {
             {
               $systemd=false
             }
-            /^14.*$/:
+            /^16.*$/:
             {
               $systemd=true
             }
