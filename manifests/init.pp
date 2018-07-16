@@ -11,7 +11,7 @@ class kibana(
               $elasticsearch_url     = 'http://localhost:9200',
             ) inherits kibana::params {
   class { '::kibana::install': }
-  # -> class { '::kibana::config': }
+  -> class { '::kibana::config': }
   ~> class { '::kibana::service': }
   -> Class['::kibana']
 }
