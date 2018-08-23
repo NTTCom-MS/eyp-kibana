@@ -1,10 +1,10 @@
 # CHANGELOG
 
-## 0.3.0
+## 6.3.0
 
-* Added support for elasticsearch 6.3
+* Added support for kibana 6.3
 * **INCOMPATIBLE CHANGE**:
-  - Dropped support for older
+  - Dropped support for older versions
 
 ## 0.2.0
 
