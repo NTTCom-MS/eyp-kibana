@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 6.5.0
+
+* Supported version: 6.5
+
 ## 6.3.0
 
 * Added support for kibana 6.3

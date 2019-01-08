@@ -11,7 +11,7 @@ class kibana::params {
       {
         /^7.*$/:
         {
-          $package_url='https://artifacts.elastic.co/downloads/kibana/kibana-6.3.1-x86_64.rpm'
+          $package_url='https://artifacts.elastic.co/downloads/kibana/kibana-6.5.4-x86_64.rpm'
           $package_provider = 'rpm'
         }
         default: { fail('Unsupported RHEL/CentOS version!')  }
