@@ -21,9 +21,7 @@ OS/Puppet version it works with.
 
 ## Module Description
 
-* available kibana versions:
-  * 4.1.2
-  * 4.5.4
+It only supports kibana 6.3
 
 ## Setup
 
