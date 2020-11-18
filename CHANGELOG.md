@@ -1,9 +1,5 @@
 # CHANGELOG
 
-## 6.6.0
-
-* Added wildcard for variables
-
 ## 6.5.0
 
 * Supported version: 6.5
