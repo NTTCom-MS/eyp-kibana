@@ -1,5 +1,6 @@
 #
 class kibana(
+              $manage_config_file    = true,
               $manage_package        = true,
               $package_ensure        = 'installed',
               $manage_service        = true,
@@ -11,19 +12,21 @@ class kibana(
               $elasticsearch_url     = 'http://localhost:9200',
             ) inherits kibana::params {
 
-  concat { '/etc/kibana/kibana.yml':
-    ensure => 'present',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    notify => Class['kibana::service'],
-  }
+  if($manage_config_file)
+  {
+    concat { '/etc/kibana/kibana.yml':
+      ensure => 'present',
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      # notify => Class['kibana::service'],
+    }
 
-  concat::fragment{ 'kibana':
-    order   => '00',
-    target  => '/etc/kibana/kibana.yml',
-    content => template("${module_name}/kibana.erb"),
-
+    concat::fragment{ 'kibana':
+      order   => '00',
+      target  => '/etc/kibana/kibana.yml',
+      content => template("${module_name}/kibana.erb"),
+    }
   }
 
   class { '::kibana::install': }
