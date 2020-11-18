@@ -19,7 +19,7 @@ class kibana(
     notify => Class['kibana::service'],
   }
 
-  concat::fragment{ 'kibana property':
+  concat::fragment{ 'kibana':
     order   => '00',
     target  => '/etc/kibana/kibana.yml',
     content => template("${module_name}/kibana.erb"),
