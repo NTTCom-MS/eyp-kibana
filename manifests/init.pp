@@ -11,6 +11,21 @@ class kibana(
               $elasticsearch_url     = 'http://localhost:9200',
             ) inherits kibana::params {
 
+  concat { '/etc/kibana/kibana.yml':
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    notify => Class['kibana::service'],
+  }
+
+  concat::fragment{ 'kibana property':
+    order   => '00',
+    target  => '/etc/kibana/kibana.yml',
+    content => template("${module_name}/kibana.erb"),
+
+  }
+
   class { '::kibana::install': }
   -> class { '::kibana::config': }
   ~> class { '::kibana::service': }
