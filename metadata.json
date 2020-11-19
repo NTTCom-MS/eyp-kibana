@@ -1,6 +1,6 @@
 {
   "name": "eyp-kibana",
-  "version": "6.6.0",
+  "version": "6.5.0",
   "author": "eyp",
   "summary": "kibana installation and kibana.yml management",
   "license": "Apache-2.0",
