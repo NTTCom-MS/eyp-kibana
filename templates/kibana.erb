@@ -116,3 +116,24 @@ elasticsearch.url: "<%= @elasticsearch_url %>"
 # The default locale. This locale can be used in certain circumstances to substitute any missing
 # translations.
 #i18n.defaultLocale: "en"
+
+# xpack
+
+<% if defined?(@xpack_ml_enabled) -%>
+xpack.ml.enabled: <%= @xpack_ml_enabled %>
+<% end -%>
+<% if defined?(@xpack_apm_enabled) -%>
+xpack.apm.enabled: <%= @xpack_apm_enabled %>
+<% end -%>
+<% if defined?(@xpack_infra_enabled) -%>
+xpack.infra.enabled: <%= @xpack_infra_enabled %>
+<% end -%>
+<% if defined?(@xpack_canvas_enabled) -%>
+xpack.canvas.enabled: <%= @xpack_canvas_enabled %>
+<% end -%>
+<% if defined?(@xpack_monitoring_enabled) -%>
+xpack.monitoring.enabled: <%= @xpack_monitoring_enabled %>
+<% end -%>
+<% if defined?(@timelion_enabled) -%>
+timelion.enabled: <%= @timelion_enabled %>
+<% end -%>
