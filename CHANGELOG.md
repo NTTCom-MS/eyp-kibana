@@ -4,6 +4,7 @@
 
 * Added xpack variables
 
+=======
 ## 6.5.0
 
 * Supported version: 6.5
