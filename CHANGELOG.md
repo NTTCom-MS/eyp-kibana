@@ -2,7 +2,7 @@
 
 ## 6.6.0
 
-* Added wildcard for variables
+* Added xpack variables
 
 ## 6.5.0
 
